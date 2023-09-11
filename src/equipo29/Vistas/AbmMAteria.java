@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package ulpalumnos.vistas;
+package equipo29.vistas;
 
 /**
  *
