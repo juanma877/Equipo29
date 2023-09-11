@@ -1,5 +1,5 @@
 
-package ulpalumnos.Conexion;
+package equipo29.Conexion;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
