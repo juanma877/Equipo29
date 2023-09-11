@@ -58,7 +58,7 @@ public class InscripcionData {
             while (rs.next()) {
                 Inscripcion inscripcion = new Inscripcion();
                 inscripcion.setIdInscripcion(rs.getInt("idIscripcion"));
-                inscripcion.setNota(rs.getDouble("nota"));
+                inscripcion.setNota(rs.getInt("nota"));
                 inscripcion.setAlumno(aluData.buscarAlumno(rs.getInt("idAlumno")));
                 inscripcion.setMateria(matData.buscarMateria(rs.getInt("idMateria")));
                 inscripciones.add(inscripcion);
@@ -80,7 +80,7 @@ public class InscripcionData {
             while (rs.next()) {
                 Inscripcion inscripcion = new Inscripcion();
                 inscripcion.setIdInscripcion(rs.getInt("idIscripcion"));
-                inscripcion.setNota(rs.getDouble("nota"));
+                inscripcion.setNota(rs.getInt("nota"));
                 inscripcion.setAlumno(aluData.buscarAlumno(rs.getInt("idAlumno")));
                 inscripcion.setMateria(matData.buscarMateria(rs.getInt("idMateria")));
                 inscripciones.add(inscripcion);
