@@ -17,6 +17,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
      */
     public PantallaPrincipal() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -147,7 +148,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
        escritorio.removeAll();
         escritorio.repaint();
-        AbmMAteria ap = new AbmMAteria();
+        AbmMateria ap = new AbmMateria();
         ap.setVisible(true);
         escritorio.add(ap);
         escritorio.moveToFront(ap);
@@ -181,7 +182,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenu5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu5ActionPerformed
-        System.exit(WIDTH);
+        this.dispose();
     }//GEN-LAST:event_jMenu5ActionPerformed
 
     /**

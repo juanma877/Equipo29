@@ -10,12 +10,12 @@ package equipo29.vistas;
  *
  * @author 20352555674
  */
-public class AbmMAteria extends javax.swing.JInternalFrame {
+public class AbmMateria extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form AbmAlumno
      */
-    public AbmMAteria() {
+    public AbmMateria() {
         initComponents();
     }
 
@@ -86,6 +86,11 @@ public class AbmMAteria extends javax.swing.JInternalFrame {
 
         jButton5.setBackground(new java.awt.Color(0, 153, 102));
         jButton5.setText("Salir");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -188,6 +193,11 @@ public class AbmMAteria extends javax.swing.JInternalFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton5ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

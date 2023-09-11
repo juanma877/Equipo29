@@ -60,7 +60,7 @@ public class InscripcionData {
                 inscripcion.setIdInscripcion(rs.getInt("idIscripcion"));
                 inscripcion.setNota(rs.getInt("nota"));
                 inscripcion.setAlumno(aluData.buscarAlumnoPorId(rs.getInt("idAlumno")));
-                inscripcion.setMateria(matData.buscarMateria(rs.getInt("idMateria")));
+//                inscripcion.setMateria(matData.buscarMateria(rs.getInt("idMateria")));
                 inscripciones.add(inscripcion);
             }
             ps.close();
@@ -82,7 +82,7 @@ public class InscripcionData {
                 inscripcion.setIdInscripcion(rs.getInt("idIscripcion"));
                 inscripcion.setNota(rs.getInt("nota"));
                 inscripcion.setAlumno(aluData.buscarAlumnoPorId(rs.getInt("idAlumno")));
-                inscripcion.setMateria(matData.buscarMateria(rs.getInt("idMateria")));
+//                inscripcion.setMateria(matData.buscarMateria(rs.getInt("idMateria")));
                 inscripciones.add(inscripcion);
             }
             ps.close();
