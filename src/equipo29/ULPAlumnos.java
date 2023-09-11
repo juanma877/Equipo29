@@ -4,9 +4,9 @@ package equipo29;
 
 
 import java.sql.Date;
-import ulpalumnos.Conexion.Conexion;
-import ulpalumnos.Data.Alumno;
-import ulpalumnos.Conexion.AlumnoData;
+import equipo29.Conexion.Conexion;
+import equipo29.Data.Alumno;
+import equipo29.Conexion.AlumnoData;
 
 
 public class ULPAlumnos {
