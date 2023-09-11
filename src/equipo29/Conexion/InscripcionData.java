@@ -9,9 +9,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import ulpalumnos.Data.Alumno;
-import ulpalumnos.Data.Inscripcion;
-import ulpalumnos.Data.Materia;
+import equipo29.Data.Alumno;
+import equipo29.Data.Inscripcion;
+import equipo29.Data.Materia;
 
 public class InscripcionData {
 
