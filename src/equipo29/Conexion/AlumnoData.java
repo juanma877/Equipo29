@@ -1,6 +1,7 @@
+<<<<<<< HEAD
+=======
 
-
-
+>>>>>>> e561f292ce8290f012c428767ae158924d2a5259
 package equipo29.Conexion;
 
 import java.sql.Connection;
@@ -11,13 +12,14 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import equipo29.Data.Alumno;
+<<<<<<< HEAD
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+=======
 
-
-
+>>>>>>> e561f292ce8290f012c428767ae158924d2a5259
 
 public class AlumnoData {
 

@@ -1,5 +1,5 @@
 
-package equipo29.Conexion;
+package ulpalumnos.Conexion;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

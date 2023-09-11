@@ -1,5 +1,5 @@
 
-package equipo29.Data;
+package ulpalumnos.Data;
 
 
 public class Materia {
