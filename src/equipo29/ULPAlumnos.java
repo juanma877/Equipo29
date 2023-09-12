@@ -28,7 +28,7 @@ private Conexion conexion;
         alumnodata= new AlumnoData(conexion);
         alumnodata.guardarAlumno(alumno);
         
-      }
+      } 
     }
     
 
