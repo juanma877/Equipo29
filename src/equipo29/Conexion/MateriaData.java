@@ -16,12 +16,12 @@ public class MateriaData {
 
     private Connection con = null;
 
-    public MateriaData(Conexion conexion) {
-        con = conexion.buscarConexion();
+    public MateriaData() {
+        con = Conexion.buscarConexion();
     }
 
     public void guardarMateria(Materia materia) {
-        String sql = "INSERT INTO materia (nombre,año,estado"
+        String sql = "INSERT INTO materia (nombre,año,estado)"
                 + "VALUES(?,?,?)";
 
         try {
@@ -37,7 +37,7 @@ public class MateriaData {
                 materia.setIdMateria(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Materia guardada con éxito");
             }
-            ps.close();
+           
 
         } catch (SQLException ex) {
 

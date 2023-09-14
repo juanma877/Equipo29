@@ -6,17 +6,21 @@
 
 package equipo29.vistas;
 
+import equipo29.Conexion.MateriaData;
+import equipo29.Data.Materia;
+
 /**
  *
  * @author 20352555674
  */
 public class AbmMAteria extends javax.swing.JInternalFrame {
-
+ private MateriaData md;
     /**
      * Creates new form AbmAlumno
      */
-    public AbmMAteria() {
+    public AbmMAteria(MateriaData md) {
         initComponents();
+        this.md=md;
     }
 
     /**
@@ -34,7 +38,7 @@ public class AbmMAteria extends javax.swing.JInternalFrame {
         jSeparator1 = new javax.swing.JSeparator();
         año = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        estado = new javax.swing.JRadioButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -44,6 +48,7 @@ public class AbmMAteria extends javax.swing.JInternalFrame {
         eliminar = new javax.swing.JButton();
         guardar = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        modificar = new javax.swing.JButton();
 
         setTitle("Materias");
 
@@ -80,9 +85,19 @@ public class AbmMAteria extends javax.swing.JInternalFrame {
 
         eliminar.setBackground(new java.awt.Color(0, 153, 102));
         eliminar.setText("Eliminar");
+        eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarActionPerformed(evt);
+            }
+        });
 
         guardar.setBackground(new java.awt.Color(0, 153, 102));
         guardar.setText("Guardar");
+        guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                guardarActionPerformed(evt);
+            }
+        });
 
         jButton5.setBackground(new java.awt.Color(0, 153, 102));
         jButton5.setText("Salir");
@@ -92,19 +107,26 @@ public class AbmMAteria extends javax.swing.JInternalFrame {
             }
         });
 
+        modificar.setText("Modificar");
+        modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modificarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
+                .addContainerGap(24, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addGap(120, 120, 120)
-                                .addComponent(jRadioButton1))
+                                .addComponent(estado))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -116,22 +138,24 @@ public class AbmMAteria extends javax.swing.JInternalFrame {
                                     .addComponent(nuevo, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(eliminar)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(guardar)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jButton5))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(23, 23, 23)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(año, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(34, 34, 34)
-                                        .addComponent(buscar))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(eliminar)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(guardar)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jButton5))))
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(buscar)
+                                            .addComponent(modificar)))))
                             .addComponent(jSeparator1))
-                        .addGap(29, 29, 29))
+                        .addGap(23, 23, 23))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(163, 163, 163))))
@@ -146,12 +170,13 @@ public class AbmMAteria extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(modificar))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel2)
-                                    .addComponent(codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel3)
                                     .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -159,17 +184,17 @@ public class AbmMAteria extends javax.swing.JInternalFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel4)
                                     .addComponent(año, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(buscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel5))
-                    .addComponent(jRadioButton1))
+                    .addComponent(estado))
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nuevo)
                     .addComponent(eliminar)
                     .addComponent(guardar)
                     .addComponent(jButton5))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -187,13 +212,18 @@ public class AbmMAteria extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
-        // TODO add your handling code here:
+       Materia mat = md.buscarMateria(Integer.parseInt(codigo.getText()));
+       codigo.setText(mat.getIdMateria()+"");
+       nombre.setText(mat.getNombre());
+       año.setText(mat.getAño()+"");
+       estado.setSelected(true);
     }//GEN-LAST:event_buscarActionPerformed
 
     private void nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoActionPerformed
        codigo.setText("");
        nombre.setText("");
        año.setText("");
+       estado.setSelected(false);
     }//GEN-LAST:event_nuevoActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -201,12 +231,25 @@ public class AbmMAteria extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
+        md.guardarMateria(new Materia(nombre.getText(),Integer.parseInt(año.getText()),estado.isEnabled()));
+    }//GEN-LAST:event_guardarActionPerformed
+
+    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
+       md.eliminarMateria(Integer.parseInt(codigo.getText()));
+    }//GEN-LAST:event_eliminarActionPerformed
+
+    private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
+      md.modificarMateria(md.buscarMateria(Integer.parseInt(codigo.getText())));
+    }//GEN-LAST:event_modificarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField año;
     private javax.swing.JButton buscar;
     private javax.swing.JTextField codigo;
     private javax.swing.JButton eliminar;
+    private javax.swing.JRadioButton estado;
     private javax.swing.JButton guardar;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
@@ -215,8 +258,8 @@ public class AbmMAteria extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JButton modificar;
     private javax.swing.JTextField nombre;
     private javax.swing.JButton nuevo;
     // End of variables declaration//GEN-END:variables

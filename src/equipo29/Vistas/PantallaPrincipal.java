@@ -7,6 +7,7 @@
 package equipo29.vistas;
 
 import equipo29.Conexion.AlumnoData;
+import equipo29.Conexion.MateriaData;
 
 /**
  *
@@ -14,12 +15,14 @@ import equipo29.Conexion.AlumnoData;
  */
 public class PantallaPrincipal extends javax.swing.JFrame {
 private AlumnoData ad;
+private MateriaData md;
     /**
      * Creates new form PantallaPrincipal
      */
     public PantallaPrincipal() {
         initComponents();
         ad = new AlumnoData();
+        md = new MateriaData();
     }
 
     /**
@@ -150,7 +153,7 @@ private AlumnoData ad;
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         escritorio.removeAll();
        escritorio.repaint();
-       AbmMAteria materia = new AbmMAteria();
+       AbmMAteria materia = new AbmMAteria(md);
        materia.setVisible(true);
        escritorio.add(materia);
        escritorio.moveToFront(materia);
