@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import equipo29.Data.Alumno;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -14,8 +15,8 @@ public class AlumnoData {
 
     private Connection con = null;
 
-    public  AlumnoData(Conexion conexion) {
-        con = conexion.buscarConexion();
+    public  AlumnoData() {
+        con = Conexion.buscarConexion();
     }
 
   
@@ -29,7 +30,7 @@ public class AlumnoData {
                 ps.setInt(1, alumno.getDni());
                 ps.setString(2, alumno.getApellido());
                 ps.setString(3, alumno.getNombre());
-                ps.setDate(4, alumno.getFechaNacimiento());
+                ps.setDate(4, Date.valueOf(alumno.getFechaNacimiento()));
                 ps.setBoolean(5, alumno.isEstado());
                 
                 int affectedRows = ps.executeUpdate();
@@ -60,7 +61,7 @@ public class AlumnoData {
             ps.setInt(1, alumno.getDni());
             ps.setString(2, alumno.getApellido());
             ps.setString(3, alumno.getNombre());
-            ps.setDate(4, alumno.getFechaNacimiento());
+            ps.setDate(4, Date.valueOf(alumno.getFechaNacimiento()));
             ps.setInt(5, alumno.getIdAlumno());
 
             int affectedRows = ps.executeUpdate();
@@ -75,26 +76,27 @@ public class AlumnoData {
 
     }
 
-    public void eliminarAlumno(int id) {
-        String sql = "UPDATE alumno SET estado=0 WHERE ID=?";
+    public void eliminarAlumno(int idAlumno) {
+        String sql = "UPDATE alumno SET estado=0 WHERE idAlumno=?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idAlumno);
             int affectedRows = ps.executeUpdate();
-            if (affectedRows == 1) {
+            if (affectedRows == 1) {    
 
                 JOptionPane.showMessageDialog(null, "Alumno Eliminado");
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al conectase a la base de datos");
+            JOptionPane.showMessageDialog(null, "Error al conectase a la base de datos eliminarID"+ex.getMessage());
         }
 
     }
 
     public Alumno buscarAlumnoPorId(int id) {
 
-        String sql = "SELECT dni, apellido, nombre, fechaNacimineto FROM alumno WHERE idAlumno=? AND estado=1";
+        String sql = "SELECT dni, apellido, nombre, fechaNacimiento FROM alumno WHERE idAlumno=? AND estado=1";
         Alumno alumno = null;
 
         
@@ -107,7 +109,7 @@ public class AlumnoData {
                     alumno.setDni(rs.getInt("dni"));
                     alumno.setApellido(rs.getString("apellido"));
                     alumno.setNombre(rs.getString("nombre"));
-                    alumno.setFechaNacimiento(rs.getDate("fechaNacimiento"));
+                    alumno.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
                     alumno.setEstado(true);
                     
                 } else {
@@ -121,9 +123,9 @@ public class AlumnoData {
         return alumno;
     }
 
-    public Alumno buscarAlumnoPorDni(int dni) {
+    public Alumno buscarAlumnoPorDni(int dni) throws NullPointerException{
 
-        String sql = "SELECT idAlumno,dni, apellido, nombre, fechaNacimineto FROM alumno WHERE dni=? AND estado=1";
+        String sql = "SELECT idAlumno,dni, apellido, nombre, fechaNacimiento FROM alumno WHERE dni=? AND estado=1";
         Alumno alumno = null;
 
         
@@ -136,7 +138,7 @@ public class AlumnoData {
                     alumno.setDni(rs.getInt("dni"));
                     alumno.setApellido(rs.getString("apellido"));
                     alumno.setNombre(rs.getString("nombre"));
-                    alumno.setFechaNacimiento(rs.getDate("fechaNacimiento"));
+                    alumno.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
                     alumno.setEstado(true);
                     
                 } else {
@@ -164,7 +166,7 @@ public class AlumnoData {
                     alumno.setDni(rs.getInt("dni"));
                     alumno.setApellido(rs.getString("apellido"));
                     alumno.setNombre(rs.getString("nombre"));
-                    alumno.setFechaNacimiento(rs.getDate("fechaNacimiento"));
+                    alumno.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
                     alumno.setEstado(true);
                     alumnos.add(alumno);
                     

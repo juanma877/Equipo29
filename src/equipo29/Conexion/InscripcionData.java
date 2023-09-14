@@ -19,8 +19,8 @@ public class InscripcionData {
     private MateriaData matData;
     private AlumnoData aluData;
 
-    public InscripcionData(Conexion conexion) {
-        this.con = conexion.buscarConexion();
+    public InscripcionData() {
+        this.con = Conexion.buscarConexion();
     }
 
     public void guardarInscripcion(Inscripcion insc) {
@@ -184,7 +184,7 @@ public class InscripcionData {
                 alumno.setDni(rs.getInt("dni"));
                 alumno.setApellido(rs.getString("apellido"));
                 alumno.setNombre(rs.getString("nombre"));
-                alumno.setFechaNacimiento(rs.getDate("fechaNacimiento"));
+                alumno.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
                 alumno.setEstado(rs.getBoolean("estado"));
                 alumnos.add(alumno);
             }

@@ -4,26 +4,24 @@ package equipo29.Conexion;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 
 
 public class Conexion {
-    private  String url;
-    private  String usuario;    
-    private  String password;   
+    private static String url="jdbc:mariadb://localhost:3306/ulpalumnos?serverTimezone=UTC";
+    private static String usuario="root";    
+    private static String password="";   
     
-    private static Connection conexion = null;  // lo que importa  
+    private static Connection conexion;  // lo que importa  
     
     public Conexion(String url, String usuario, String password){     
-        this.url=url;  // "jdbc:mariabd://localhost:3306/universidad"
-        this.usuario=usuario;
-        this.password=password;
+        this.url="jdbc:mariadb://localhost:3306/ulpalumnos?serverTimezone=UTC";  // "jdbc:mariabd://localhost:3306/universidad"
+        this.usuario="root";
+        this.password="";
     }
       
-    public Connection buscarConexion(){
+    public static Connection buscarConexion(){
         if (conexion==null) {  // si es la primera vez
             try {
                 //cargamos las clases de mariadb que implementan JDBC

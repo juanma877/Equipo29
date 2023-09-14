@@ -6,17 +6,20 @@
 
 package equipo29.vistas;
 
+import equipo29.Conexion.AlumnoData;
+
 /**
  *
  * @author 20352555674
  */
 public class PantallaPrincipal extends javax.swing.JFrame {
-
+private AlumnoData ad;
     /**
      * Creates new form PantallaPrincipal
      */
     public PantallaPrincipal() {
         initComponents();
+        ad = new AlumnoData();
     }
 
     /**
@@ -138,7 +141,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
        escritorio.removeAll();
        escritorio.repaint();
-       AbmAlumno alumno = new AbmAlumno();
+       AbmAlumno alumno = new AbmAlumno(ad);
        alumno.setVisible(true);
        escritorio.add(alumno);
        escritorio.moveToFront(alumno);
