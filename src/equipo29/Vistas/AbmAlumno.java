@@ -9,8 +9,10 @@ package equipo29.vistas;
 import equipo29.Conexion.AlumnoData;
 import equipo29.Data.Alumno;
 import java.time.ZoneId;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -231,19 +233,30 @@ public class AbmAlumno extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
-      
-      Alumno alum =  ad.buscarAlumnoPorDni(Integer.parseInt(documento.getText()));
-      apellido.setText(alum.getApellido());
+      if(!documento.getText().isEmpty()){
+          Alumno alum =  ad.buscarAlumnoPorDni(Integer.parseInt(documento.getText()));
+      id.setText(alum.getIdAlumno()+"");
+          apellido.setText(alum.getApellido());
       nombre.setText(alum.getNombre());
-      fechaNacimiento.setDateFormatString(alum.getFechaNacimiento().toString());
-        
+      estado.setSelected(true);
+      fechaNacimiento.setDate(Date.from(alum.getFechaNacimiento().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+      }else if(!id.getText().isEmpty()){
+          Alumno alum=ad.buscarAlumnoPorId(Integer.parseInt(id.getText()));
+          documento.setText(alum.getDni()+"");
+          apellido.setText(alum.getApellido());
+          nombre.setText(alum.getNombre());
+          estado.setSelected(true);
+          fechaNacimiento.setDate(Date.from(alum.getFechaNacimiento().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+      }
     }//GEN-LAST:event_buscarActionPerformed
 
     private void nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoActionPerformed
-       documento.setText("");
+       id.setText("");
+        documento.setText("");
        apellido.setText("");
        nombre.setText("");
-       
+       estado.setSelected(false);
+       fechaNacimiento.setDate(null);
     }//GEN-LAST:event_nuevoActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
