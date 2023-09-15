@@ -240,7 +240,12 @@ public class AbmMAteria extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_eliminarActionPerformed
 
     private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
-      md.modificarMateria(md.buscarMateria(Integer.parseInt(codigo.getText())));
+      Materia mat = md.buscarMateria(Integer.parseInt(codigo.getText()));
+      
+        
+        mat.setNombre(nombre.getText());
+        mat.setAño(Integer.parseInt(año.getText()));
+        md.modificarMateria(mat);
     }//GEN-LAST:event_modificarActionPerformed
 
 
