@@ -1,4 +1,3 @@
-
 package equipo29.Conexion;
 
 import java.sql.Connection;
@@ -12,6 +11,8 @@ import javax.swing.JOptionPane;
 import equipo29.Data.Alumno;
 import equipo29.Data.Inscripcion;
 import equipo29.Data.Materia;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class InscripcionData {
 
@@ -93,7 +94,7 @@ public class InscripcionData {
     }
 
     public List<Materia> obtenerMateriasCursadas(int id) {
-        List<Materia> materias = new ArrayList<>();
+        List<Materia> materiasC = new ArrayList<>();
         try {
             String query = "SELECT inscripcion.idMateria, nombre, año FROM inscripcion, materia "
                     + "WHERE inscripcion.idMateria = materia.idMateria AND inscripcion.idAlumno = ?";
@@ -105,53 +106,51 @@ public class InscripcionData {
                 materia.setIdMateria(rs.getInt("idMateria"));
                 materia.setNombre(rs.getString("nombre"));
                 materia.setAño(rs.getInt("año"));
-                materias.add(materia);
+                materiasC.add(materia);
             }
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al obtener materias cursadas " + ex.getMessage());
         }
-        return materias;
+        return materiasC;
     }
 
     public List<Materia> obtenerMateriasNOCursadas(int id) {
-        List<Materia> materias = new ArrayList<>();
+        List<Materia> materiasC = new ArrayList<>();
+        List<Materia> materiasNC = new ArrayList<>();
+        materiasC = obtenerMateriasCursadas(id);
         try {
-            String query1 = "SELECT inscripcion.idMateria, nombre, año FROM inscripcion, materia "
-                    + "WHERE inscripcion.idMateria = materia.idMateria AND inscripcion.idAlumno = ?";
-            PreparedStatement ps1 = con.prepareStatement(query1);
-            ps1.setInt(1, id);
-            ResultSet rs1 = ps1.executeQuery();
-            if(rs1.next()){
-                String query = "SELECT materia.idMateria, nombre, año FROM inscripcion, materia "
-                    + "WHERE inscripcion.idMateria != materia.idMateria AND inscripcion.idAlumno = ?";
-            PreparedStatement ps = con.prepareStatement(query);
-            ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
+            if (materiasC.isEmpty()) {
+                String query = "SELECT idMateria, nombre, año FROM materia WHERE materia.estado = 1";
+                PreparedStatement ps;
+                ps = con.prepareStatement(query);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    Materia materia1 = new Materia();
+                    materia1.setIdMateria(rs.getInt("idMateria"));
+                    materia1.setNombre(rs.getString("nombre"));
+                    materia1.setAño(rs.getInt("año"));
+                    materiasNC.add(materia1);
+                }
+                ps.close();
+            } else {
+                String query = "SELECT idMateria, nombre, año from materia where idMateria NOT IN (SELECT idMateria from inscripcion WHERE idAlumno = ?)";
+                PreparedStatement ps = con.prepareStatement(query);
+                ps.setInt(1, id);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
                 Materia materia = new Materia();
                 materia.setIdMateria(rs.getInt("idMateria"));
                 materia.setNombre(rs.getString("nombre"));
                 materia.setAño(rs.getInt("año"));
-                materias.add(materia);
+                materiasNC.add(materia);
                 }
-            }else{
-            String query2 = "SELECT idMateria, nombre, año FROM materia WHERE materia.estado = 1";
-                PreparedStatement ps2 = con.prepareStatement(query2);
-                ResultSet rs2 = ps2.executeQuery();
-                while (rs2.next()) {
-                Materia materia1 = new Materia();
-                materia1.setIdMateria(rs2.getInt("idMateria"));
-                materia1.setNombre(rs2.getString("nombre"));
-                materia1.setAño(rs2.getInt("año"));
-                materias.add(materia1);
-                }
-            }
-            //ps.close();
+                ps.close();
+            }   
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al obtener materias NO cursadas " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al obtener materias NO cursadas ");
         }
-        return materias;
+        return materiasNC;
     }
 
     public void borrarInscripcionMateriaAlumno(int idAlumno, int idMateria) {
