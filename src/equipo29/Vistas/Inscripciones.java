@@ -15,6 +15,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.TreeSet;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -24,8 +25,8 @@ import javax.swing.table.DefaultTableModel;
 public class Inscripciones extends javax.swing.JInternalFrame {
     private InscripcionData ins;
     private AlumnoData ad;
-    public static ArrayList<Alumno> alumnos1 = new ArrayList<>();
-    public static List<Materia> materias1 = new ArrayList<>();
+    private ArrayList<Alumno> alumnos1 = new ArrayList<>();
+    private List<Materia> materias1 = new ArrayList<>();
     private final DefaultComboBoxModel combo = new DefaultComboBoxModel();
     private final DefaultTableModel modelo = new DefaultTableModel();
     /**
@@ -85,12 +86,6 @@ public class Inscripciones extends javax.swing.JInternalFrame {
         jLabel1.setText("Formulario de inscriociones");
 
         jLabel2.setText("Seleccione alumno");
-
-        alumnos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                alumnosMouseClicked(evt);
-            }
-        });
 
         jLabel3.setText("Listado de materias");
 
@@ -221,24 +216,16 @@ public class Inscripciones extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void alumnosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_alumnosMouseClicked
-        
-        
-        if(noinscriptas.isSelected()){
-            
-        }
-    }//GEN-LAST:event_alumnosMouseClicked
-
     private void noinscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noinscriptasActionPerformed
         Alumno al = (Alumno) alumnos.getSelectedItem();
-       
+        borrarFilas();
         if(noinscriptas.isSelected()){
             materias1 = ins.obtenerMateriasNOCursadas(al.getIdAlumno());
-             cargarDatos();
+            cargarDatos(materias1);
             inscriptas.setEnabled(false);
            
         }else{
-            borrarFilas();
+            
             inscriptas.setEnabled(true);
         }
         
@@ -247,14 +234,15 @@ public class Inscripciones extends javax.swing.JInternalFrame {
 
     private void inscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inscriptasActionPerformed
         Alumno al = (Alumno) alumnos.getSelectedItem();
-       
+        //List<Materia> materias2 = new ArrayList<>();
+        borrarFilas();
         if(inscriptas.isSelected()){
             materias1 = ins.obtenerMateriasCursadas(al.getIdAlumno());
-             cargarDatos();
+             cargarDatos(materias1);
             
            noinscriptas.setEnabled(false);
         }else{
-            borrarFilas();
+            
             noinscriptas.setEnabled(true);
         }
         
@@ -293,9 +281,10 @@ public class Inscripciones extends javax.swing.JInternalFrame {
         tabla.setModel(modelo);
     }
      
-         private void cargarDatos() { //Esta lista de alumnos puede provenir de la BD o cargada por parámetros
+         private void cargarDatos(List<Materia> materias1) { //Esta lista de alumnos puede provenir de la BD o cargada por parámetros
        for(Materia mat: materias1){
         modelo.addRow(new Object[]{mat.getIdMateria(),mat.getNombre(),mat.getAño()});
+        //JOptionPane.showMessageDialog(this, mat);
         
 
         
