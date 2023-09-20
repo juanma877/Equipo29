@@ -59,6 +59,8 @@ public class AbmMAteria extends javax.swing.JInternalFrame {
         jLabel1.setText("Materia");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
+        estado.setBackground(new java.awt.Color(0, 153, 102));
+
         jLabel2.setText("Codigo:");
 
         jLabel3.setText("Nombre:");
@@ -107,6 +109,7 @@ public class AbmMAteria extends javax.swing.JInternalFrame {
             }
         });
 
+        modificar.setBackground(new java.awt.Color(0, 153, 102));
         modificar.setText("Modificar");
         modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

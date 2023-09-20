@@ -9,6 +9,7 @@ package equipo29.vistas;
 import equipo29.Conexion.AlumnoData;
 import equipo29.Conexion.InscripcionData;
 import equipo29.Data.Alumno;
+import equipo29.Data.Inscripcion;
 import equipo29.Data.Materia;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -122,9 +123,19 @@ public class Inscripciones extends javax.swing.JInternalFrame {
 
         jButton1.setBackground(new java.awt.Color(0, 153, 102));
         jButton1.setText("Inscribir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(0, 153, 102));
         jButton2.setText("Anular");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(0, 153, 102));
         jButton3.setText("Salir");
@@ -247,6 +258,26 @@ public class Inscripciones extends javax.swing.JInternalFrame {
         }
         
     }//GEN-LAST:event_inscriptasActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        if (tabla.getSelectedRow() != -1) {
+            Alumno al = (Alumno) alumnos.getSelectedItem();
+            Materia mat = new Materia(Integer.parseInt(modelo.getValueAt(tabla.getSelectedRow(), 0).toString()), modelo.getValueAt(tabla.getSelectedRow(), 1).toString(), Integer.parseInt(modelo.getValueAt(tabla.getSelectedRow(), 2).toString()), true);
+            Inscripcion insc = new Inscripcion(al, mat);
+            ins.guardarInscripcion(insc);
+        }
+        //ins.guardarInscripcion(insc);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+         if (tabla.getSelectedRow() != -1) {
+            Alumno al = (Alumno) alumnos.getSelectedItem();
+            int idmat = Integer.parseInt(modelo.getValueAt(tabla.getSelectedRow(), 0).toString());
+            ins.borrarInscripcionMateriaAlumno(al.getIdAlumno(), idmat);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

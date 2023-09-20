@@ -25,29 +25,36 @@ public class InscripcionData {
     }
 
     public void guardarInscripcion(Inscripcion insc) {
-        String insert = "INSERT INTO inscripcion(nota, idAlumno, idMateria) VALUES (?, ?, ?)";
         try {
-            PreparedStatement ps = con.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
-            ps.setDouble(1, insc.getNota());
-            ps.setInt(2, insc.getAlumno().getIdAlumno());
-            ps.setInt(3, insc.getMateria().getIdMateria());
-
-            int affectedRows = ps.executeUpdate();
-            if (affectedRows == 0) {
-                System.out.println("No se pudo insertar el registro.");
+            String query = "SELECT idInscripcion FROM inscripcion WHERE inscripcion.idAlumno = ? AND inscripcion.idMateria = ?";
+            PreparedStatement ps = con.prepareStatement(query);;
+            ps.setInt(1, insc.getAlumno().getIdAlumno());
+            ps.setInt(2, insc.getMateria().getIdMateria());
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(null, "Alumno ya inscripto a la materia seleccionada");
             } else {
-                ResultSet rs = ps.getGeneratedKeys();
-                if (rs.next()) {
-                    insc.setIdInscripcion(rs.getInt("idInscripcion"));
+                String insert = "INSERT INTO inscripcion(idAlumno, idMateria) VALUES (?, ?)";
+                PreparedStatement ps2 = con.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
+                ps2.setInt(1, insc.getAlumno().getIdAlumno());
+                ps2.setInt(2, insc.getMateria().getIdMateria());
+                int affectedRows = ps2.executeUpdate();
+                if (affectedRows == 0) {
+                    JOptionPane.showMessageDialog(null, "No se pudo insertar el registro.");
                 } else {
-                    System.out.println("No se pudo obtener el ID generado.");
+                    ResultSet rs2 = ps2.getGeneratedKeys();
+                    if (rs2.next()) {
+                        //insc.setIdInscripcion(rs2.getInt("idInscripcion"));
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No se pudo obtener el ID generado.");
+                    }
+                    JOptionPane.showMessageDialog(null, "Inscipcion realizada");
                 }
             }
-            ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al guardar inscripcion");
+            JOptionPane.showMessageDialog(null, "Error al guardar inscripcion" + ex.getMessage());
         }
-
+        
     }
 
     public List<Inscripcion> obtenerInscripciones() {
@@ -117,18 +124,18 @@ public class InscripcionData {
     public List<Materia> obtenerMateriasNOCursadas(int id) {
         List<Materia> materiasNC = new ArrayList<>();
         try {
-                String query = "SELECT idMateria, nombre, año from materia where idMateria NOT IN (SELECT idMateria from inscripcion WHERE idAlumno = ?) AND materia.estado = 1";
-                PreparedStatement ps = con.prepareStatement(query);
-                ps.setInt(1, id);
-                ResultSet rs = ps.executeQuery();
-                while (rs.next()) {
+            String query = "SELECT idMateria, nombre, año from materia where idMateria NOT IN (SELECT idMateria from inscripcion WHERE idAlumno = ?) AND materia.estado = 1";
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
                 Materia materia = new Materia();
                 materia.setIdMateria(rs.getInt("idMateria"));
                 materia.setNombre(rs.getString("nombre"));
                 materia.setAño(rs.getInt("año"));
                 materiasNC.add(materia);
-                } 
-        ps.close();
+            }
+            ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al obtener materias NO cursadas ");
         }
@@ -136,7 +143,7 @@ public class InscripcionData {
     }
 
     public void borrarInscripcionMateriaAlumno(int idAlumno, int idMateria) {
-        String del = "DELETE * FROM inscripcion WHERE idAlumno = ? AND idMateria = ?";
+        String del = "DELETE FROM inscripcion WHERE idAlumno = ? AND idMateria = ?";
         try {
             PreparedStatement ps = con.prepareStatement(del);
             ps.setInt(1, idAlumno);
