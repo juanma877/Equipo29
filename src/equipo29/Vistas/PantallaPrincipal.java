@@ -174,7 +174,7 @@ private InscripcionData ins;
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         escritorio.removeAll();
        escritorio.repaint();
-       Notas nota = new Notas();
+       Notas nota = new Notas(ins,ad);
        nota.setVisible(true);
        escritorio.add(nota);
        escritorio.moveToFront(nota);

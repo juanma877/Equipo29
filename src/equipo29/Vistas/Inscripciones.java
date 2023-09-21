@@ -29,7 +29,11 @@ public class Inscripciones extends javax.swing.JInternalFrame {
     private ArrayList<Alumno> alumnos1 = new ArrayList<>();
     private List<Materia> materias1 = new ArrayList<>();
     private final DefaultComboBoxModel combo = new DefaultComboBoxModel();
-    private final DefaultTableModel modelo = new DefaultTableModel();
+    private DefaultTableModel modelo = new DefaultTableModel() { //Sobreescribimos un método de DefaultTableModel para que las celdas no sean editables
+        public boolean isCellEditable(int fila, int columna) {
+            return false;
+        }
+    };
     /**
      * Creates new form Inscripciones
      */

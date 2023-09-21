@@ -100,7 +100,8 @@ public class AlumnoData {
         Alumno alumno = null;
 
         
-            try (PreparedStatement ps = con.prepareStatement(sql)) {
+            try {
+                PreparedStatement ps = con.prepareStatement(sql);
                 ps.setInt(1, idAlumno);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {

@@ -84,7 +84,7 @@ public class MateriaData {
     public Materia buscarMateria(int id) {
         String sql = "SELECT idMateria, nombre, año FROM materia WHERE  idMateria= ? AND estado=1 ";
 
-        Materia materia = null;
+        Materia materia = new Materia();
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -107,7 +107,7 @@ public class MateriaData {
     }
 
     public List <Materia> listarMaterias() {
-        String sql = "SELECT idMateria, nombre, año FROM materia WHERE  idMateria= ? AND estado=1 ";
+        String sql = "SELECT idMateria, nombre, año FROM materia WHERE estado=1 ";
 
         ArrayList<Materia> materias = new ArrayList<>();
 

@@ -6,17 +6,43 @@
 
 package equipo29.vistas;
 
+import equipo29.Conexion.AlumnoData;
+import equipo29.Conexion.InscripcionData;
+import equipo29.Data.Alumno;
+import equipo29.Data.Inscripcion;
+import equipo29.Data.Materia;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author 20352555674
  */
 public class Notas extends javax.swing.JInternalFrame {
-
+    private InscripcionData ins;
+    private AlumnoData ad;
+    private ArrayList<Alumno> alumnos1 = new ArrayList<>();
+    private List<Inscripcion> inscripcion1 = new ArrayList<>();
+    private final DefaultComboBoxModel combo = new DefaultComboBoxModel();
+    private DefaultTableModel modelo = new DefaultTableModel() { //Sobreescribimos un método de DefaultTableModel para que las celdas no sean editables
+        public boolean isCellEditable(int fila, int columna) {
+            if (columna==2){
+                return true;
+            }
+            return false;
+        }
+    };
     /**
      * Creates new form Notas
      */
-    public Notas() {
+    public Notas(InscripcionData ins,AlumnoData ad) {
         initComponents();
+        armarCombo();
+        armarCabecera();
+        this.ins=ins;
+        this.ad=ad;
     }
 
     /**
@@ -32,11 +58,12 @@ public class Notas extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        comboNotas = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaNotas = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        botonNotas = new javax.swing.JButton();
 
         setTitle("Notas");
 
@@ -48,7 +75,7 @@ public class Notas extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Seleccione alumno");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaNotas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -59,16 +86,29 @@ public class Notas extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaNotas);
 
         jButton1.setBackground(new java.awt.Color(0, 153, 102));
         jButton1.setText("Guardar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(0, 153, 102));
         jButton2.setText("Salir");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
+            }
+        });
+
+        botonNotas.setBackground(new java.awt.Color(0, 153, 102));
+        botonNotas.setText("Buscar");
+        botonNotas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonNotasActionPerformed(evt);
             }
         });
 
@@ -87,7 +127,7 @@ public class Notas extends javax.swing.JInternalFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(34, 34, 34)
-                                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(comboNotas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
@@ -95,6 +135,8 @@ public class Notas extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(botonNotas)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
@@ -110,13 +152,14 @@ public class Notas extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboNotas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(botonNotas))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -139,16 +182,62 @@ public class Notas extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void botonNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNotasActionPerformed
+        // TODO add your handling code here:
+        Alumno alu = (Alumno) comboNotas.getSelectedItem();
+        borrarFilas();
+        inscripcion1 = ins.obtenerInscripcionesPorAlumno(alu.getIdAlumno());
+        cargarDatos(inscripcion1);
+        
+    }//GEN-LAST:event_botonNotasActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+         Alumno alu = (Alumno) comboNotas.getSelectedItem();
+        ins.actualizarNota(Integer.parseInt(modelo.getValueAt(tablaNotas.getSelectedRow(), 0).toString()), alu.getIdAlumno(), Integer.parseInt(modelo.getValueAt(tablaNotas.getSelectedRow(), 2).toString()));
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonNotas;
+    private javax.swing.JComboBox comboNotas;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tablaNotas;
     // End of variables declaration//GEN-END:variables
+
+    private void armarCombo() {
+        AlumnoData al = new AlumnoData();
+
+        for (Alumno alum : al.listarAlumnos()) {
+            comboNotas.addItem(alum);
+        }
+    }
+
+    private void armarCabecera() {
+        modelo.addColumn("idMateria");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Nota");
+        tablaNotas.setModel(modelo);
+    }
+
+    private void cargarDatos(List<Inscripcion> inscripcion1) { //Esta lista de alumnos puede provenir de la BD o cargada por parámetros
+        for (Inscripcion insc : inscripcion1) {
+            modelo.addRow(new Object[]{insc.getMateria().getIdMateria(), insc.getMateria().getNombre(), insc.getNota()});
+            //JOptionPane.showMessageDialog(this, mat);
+        }
+    }
+
+    private void borrarFilas(){
+    int f=tablaNotas.getRowCount()-1;
+    for(;f>=0;f--){
+        modelo.removeRow(f);
+    }
+    }
+
 }
