@@ -9,7 +9,6 @@ package equipo29.vistas;
 import equipo29.Conexion.InscripcionData;
 import equipo29.Conexion.MateriaData;
 import equipo29.Data.Alumno;
-import equipo29.Data.Inscripcion;
 import equipo29.Data.Materia;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +20,8 @@ import javax.swing.table.DefaultTableModel;
  * @author 20352555674
  */
 public class ConsultaAxM extends javax.swing.JInternalFrame {
-    private InscripcionData ins;
-    private MateriaData md;
+    private InscripcionData ins = new InscripcionData();
+    private MateriaData md = new MateriaData();
     private List<Alumno> alumnos1 = new ArrayList<>();
     private final DefaultComboBoxModel combo = new DefaultComboBoxModel();
     private DefaultTableModel modelo = new DefaultTableModel() { //Sobreescribimos un método de DefaultTableModel para que las celdas no sean editables

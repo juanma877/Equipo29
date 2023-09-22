@@ -177,21 +177,21 @@ public class InscripcionData {
 
     public List<Alumno> obtenerAlumnoXMateria(int idMateria) {
         List<Alumno> alumnos = new ArrayList<>();
-        String query = "SELECT idAlumno, dni, apellido, alumno.nombre  FROM alumno, materia, inscripcion "
+        String query = "SELECT alumno.idAlumno, dni, apellido, alumno.nombre FROM alumno, materia, inscripcion "
                 + "WHERE inscripcion.idAlumno = alumno.idAlumno AND inscripcion.idMateria = materia.idMateria "
                 + "AND materia.idMateria = ?";
         try {
             PreparedStatement ps = con.prepareStatement(query);
             ps.setInt(1, idMateria);
             ResultSet rs = ps.executeQuery();
-            Alumno alumno = new Alumno();
             while (rs.next()) {
+                Alumno alumno = new Alumno();
                 alumno.setIdAlumno(rs.getInt("idAlumno"));
                 alumno.setDni(rs.getInt("dni"));
                 alumno.setApellido(rs.getString("apellido"));
                 alumno.setNombre(rs.getString("nombre"));
-                alumno.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
-                alumno.setEstado(rs.getBoolean("estado"));
+                //alumno.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
+                //alumno.setEstado(rs.getBoolean("estado"));
                 alumnos.add(alumno);
             }
             ps.close();
