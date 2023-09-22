@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import equipo29.Data.Alumno;
 import java.sql.Date;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -23,7 +24,7 @@ public class AlumnoData {
         
     
 
-    public void guardarAlumno(Alumno alumno) {
+    public void guardarAlumno(Alumno alumno) throws SQLIntegrityConstraintViolationException, SQLException {
         String sql = "INSERT INTO alumno(dni, apellido, nombre, fechaNacimiento, estado) VALUES (?, ?, ?, ?, ?)";
         
             try (PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -46,13 +47,15 @@ public class AlumnoData {
                     JOptionPane.showMessageDialog(null, "Alumno Guardado");
                 }
            
-        } catch (SQLException ex) {
+        } catch (SQLIntegrityConstraintViolationException ex) {
+            JOptionPane.showMessageDialog(null, "El DNI indicado ya se encuentra registrado");
+        } catch (SQLException ex){
             JOptionPane.showMessageDialog(null, "Error al conectase a la base de datos");
         }
 
     }
 
-    public void modificarAlumno(Alumno alumno) {
+    public void modificarAlumno(Alumno alumno) throws SQLIntegrityConstraintViolationException, SQLException {
 
         String sql = "UPDATE alumno SET dni=?, apellido=?, nombre=?, fechaNacimiento=? WHERE idAlumno=?";
         try {
@@ -70,7 +73,9 @@ public class AlumnoData {
                 JOptionPane.showMessageDialog(null, "Alumno modificado");
             }
 
-        } catch (SQLException ex) {
+        } catch (SQLIntegrityConstraintViolationException ex) {
+            JOptionPane.showMessageDialog(null, "El DNI indicado ya se encuentra registrado");
+        }catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al conectase a la base de datos");
         }
 
@@ -115,7 +120,6 @@ public class AlumnoData {
                     
                 } else {
                     JOptionPane.showMessageDialog(null, "Este alumno no existe como activo en la base de datos ");
-                    
                 }
             
         } catch (SQLException ex) {

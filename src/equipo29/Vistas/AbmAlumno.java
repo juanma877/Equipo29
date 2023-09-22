@@ -8,10 +8,13 @@ package equipo29.vistas;
 
 import equipo29.Conexion.AlumnoData;
 import equipo29.Data.Alumno;
+import java.sql.SQLException;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -63,7 +66,25 @@ public class AbmAlumno extends javax.swing.JInternalFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 102));
 
+        documento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                documentoKeyTyped(evt);
+            }
+        });
+
+        apellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                apellidoKeyTyped(evt);
+            }
+        });
+
         jLabel6.setText("Fecha de Nac.");
+
+        nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                nombreKeyTyped(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -71,11 +92,6 @@ public class AbmAlumno extends javax.swing.JInternalFrame {
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         estado.setBackground(new java.awt.Color(0, 153, 102));
-        estado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                estadoActionPerformed(evt);
-            }
-        });
 
         jLabel2.setText("Documento:");
 
@@ -249,21 +265,29 @@ public class AbmAlumno extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
-      if(!documento.getText().isEmpty()){
+      try{
+        if(!documento.getText().isEmpty()){
           Alumno alum =  ad.buscarAlumnoPorDni(Integer.parseInt(documento.getText()));
       id.setText(alum.getIdAlumno()+"");
           apellido.setText(alum.getApellido());
       nombre.setText(alum.getNombre());
       estado.setSelected(true);
       fechaNacimiento.setDate(Date.from(alum.getFechaNacimiento().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-      }else if(!id.getText().isEmpty()){
+      id.setEditable(false);
+      }else if(!id.getText().isEmpty()){  
           Alumno alum=ad.buscarAlumnoPorId(Integer.parseInt(id.getText()));
           documento.setText(alum.getDni()+"");
           apellido.setText(alum.getApellido());
           nombre.setText(alum.getNombre());
           estado.setSelected(true);
           fechaNacimiento.setDate(Date.from(alum.getFechaNacimiento().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+          id.setEditable(false);
       }
+          } catch (NullPointerException ex){
+                  
+                  }catch(NumberFormatException ex){
+                      JOptionPane.showMessageDialog(null, "Ingrese solo numeros");
+                  }
     }//GEN-LAST:event_buscarActionPerformed
 
     private void nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoActionPerformed
@@ -281,28 +305,73 @@ public class AbmAlumno extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
-       ad.guardarAlumno(new Alumno(Integer.parseInt(documento.getText()),apellido.getText(),nombre.getText(),fechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),estado.isSelected()));
+        if (!id.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "No ingrese valores en el campo ID");
+        }else if(documento.getText().isEmpty() || apellido.getText().isEmpty() || nombre.getText().isEmpty() || !estado.isSelected() || fechaNacimiento.getDate()==null){
+            JOptionPane.showMessageDialog(null, "Por favor complete los campos requeridos");
+        }else if (documento.getText().length()<7 || documento.getText().length()>8){
+                JOptionPane.showMessageDialog(null, "El documento debe tener entre 7 y 8 digitos de longitud");
+        }else{
+            try{
+            ad.guardarAlumno(new Alumno(Integer.parseInt(documento.getText()),apellido.getText(),nombre.getText(),fechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),estado.isSelected()));
+            }catch(SQLException ex){
+                
+            }
+        }   
     }//GEN-LAST:event_guardarActionPerformed
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
        Alumno alum = new Alumno();
+       try{
          ad.eliminarAlumno((Integer.parseInt(id.getText())));
+       }catch(NumberFormatException ex){
+           JOptionPane.showMessageDialog(null, "Indicar el ID del alumno a eliminar");
+       }
     }//GEN-LAST:event_eliminarActionPerformed
 
     private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
+       if(documento.getText().isEmpty() || apellido.getText().isEmpty() || nombre.getText().isEmpty() || !estado.isSelected() || fechaNacimiento.getDate()==null){
+            JOptionPane.showMessageDialog(null, "Por favor complete los campos requeridos");
+        }else if (documento.getText().length()<7 || documento.getText().length()>8){
+                JOptionPane.showMessageDialog(null, "El documento debe tener entre 7 y 8 digitos de longitud");
+        }else{
        Alumno al = ad.buscarAlumnoPorId(Integer.parseInt(id.getText()));
        al.setDni(Integer.parseInt(documento.getText()));
        al.setApellido(apellido.getText());
        al.setNombre(nombre.getText());
        al.setFechaNacimiento(fechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
        al.setIdAlumno(Integer.parseInt(id.getText()));
-       ad.modificarAlumno(al);
-       
+           try {
+               ad.modificarAlumno(al);
+           } catch (SQLException ex) {
+               
+           }
+        }
     }//GEN-LAST:event_modificarActionPerformed
 
-    private void estadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadoActionPerformed
+    private void documentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_documentoKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_estadoActionPerformed
+        char c = evt.getKeyChar();
+        if(c<'0' || c>'9') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_documentoKeyTyped
+
+    private void apellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_apellidoKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if((c<'a' || c>'z') && (c<'A' || c>'Z')) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_apellidoKeyTyped
+
+    private void nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if((c<'a' || c>'z') && (c<'A' || c>'Z')) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_nombreKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

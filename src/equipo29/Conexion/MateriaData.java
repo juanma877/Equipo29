@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ public class MateriaData {
         con = Conexion.buscarConexion();
     }
 
-    public void guardarMateria(Materia materia) {
+    public void guardarMateria(Materia materia) throws SQLIntegrityConstraintViolationException, SQLException{
         String sql = "INSERT INTO materia (nombre,año,estado)"
                 + "VALUES(?,?,?)";
 
@@ -39,14 +40,16 @@ public class MateriaData {
             }
            
 
-        } catch (SQLException ex) {
+        } catch (SQLIntegrityConstraintViolationException ex) {
+            JOptionPane.showMessageDialog(null, "El Nombre de la Materia indicado ya se encuentra registrado");
+        }catch (SQLException ex) {
 
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia");
         }
 
     }
 
-    public void modificarMateria(Materia materia) {
+    public void modificarMateria(Materia materia) throws SQLIntegrityConstraintViolationException, SQLException{
         String sql = "UPDATE materia SET nombre = ?, año = ? WHERE idMateria=?";
 
         try {
@@ -59,7 +62,9 @@ public class MateriaData {
                 JOptionPane.showMessageDialog(null, "Materia modificada");
             }
 
-        } catch (SQLException ex) {
+        }  catch (SQLIntegrityConstraintViolationException ex) {
+            JOptionPane.showMessageDialog(null, "El Codigo de Materia indicado ya se encuentra registrado");
+        }catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia");
         }
     }

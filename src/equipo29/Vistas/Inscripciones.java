@@ -270,6 +270,8 @@ public class Inscripciones extends javax.swing.JInternalFrame {
             Materia mat = new Materia(Integer.parseInt(modelo.getValueAt(tabla.getSelectedRow(), 0).toString()), modelo.getValueAt(tabla.getSelectedRow(), 1).toString(), Integer.parseInt(modelo.getValueAt(tabla.getSelectedRow(), 2).toString()), true);
             Inscripcion insc = new Inscripcion(al, mat);
             ins.guardarInscripcion(insc);
+        }else{
+            JOptionPane.showMessageDialog(null, "Seleccione alguna de las opciones");
         }
         //ins.guardarInscripcion(insc);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -280,6 +282,8 @@ public class Inscripciones extends javax.swing.JInternalFrame {
             Alumno al = (Alumno) alumnos.getSelectedItem();
             int idmat = Integer.parseInt(modelo.getValueAt(tabla.getSelectedRow(), 0).toString());
             ins.borrarInscripcionMateriaAlumno(al.getIdAlumno(), idmat);
+        }else{
+            JOptionPane.showMessageDialog(null, "Seleccione alguna de las opciones");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
