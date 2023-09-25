@@ -201,24 +201,4 @@ public class InscripcionData {
         return alumnos;
     }
     
-//    public List<String> obtenerInscripcionesPorAlumnoV2(int id) {
-//        List<String> inscripciones = new ArrayList<>();  
-//        try {
-//            String query = "SELECT materia.idMateria, nombre, nota FROM materia JOIN inscripcion ON (materia.idMateria=inscripcion.idMateria) WHERE inscripcion.idAlumno= ?";
-//            PreparedStatement ps = con.prepareStatement(query);
-//            ps.setInt(1, id);
-//            ResultSet rs = ps.executeQuery();
-//            while (rs.next()) {
-//                int idIsc=(rs.getInt("idMateria"));
-//                String nombreMat=(rs.getString("nombre"));
-//                int nota=(rs.getInt("nota"));
-//                inscripciones.add(inscripcion);
-//            }
-//            //ps.close();
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Inscripcion " + ex.getMessage());
-//        }
-//        return inscripciones;
-//    }
-    
 }
