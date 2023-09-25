@@ -3,14 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package equipo29.vistas;
 
 import equipo29.Conexion.MateriaData;
 import equipo29.Data.Materia;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,13 +15,15 @@ import javax.swing.JOptionPane;
  * @author 20352555674
  */
 public class AbmMAteria extends javax.swing.JInternalFrame {
- private MateriaData md;
+
+    private MateriaData md;
+
     /**
      * Creates new form AbmAlumno
      */
     public AbmMAteria(MateriaData md) {
         initComponents();
-        this.md=md;
+        this.md = md;
     }
 
     /**
@@ -237,23 +236,24 @@ public class AbmMAteria extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
-       try{
-       Materia mat = md.buscarMateria(Integer.parseInt(codigo.getText()));
-       codigo.setText(mat.getIdMateria()+"");
-       nombre.setText(mat.getNombre());
-       año.setText(mat.getAño()+"");
-       estado.setSelected(true);
-       codigo.setEditable(false);
-       }catch(NumberFormatException ex){
-           JOptionPane.showMessageDialog(null, "Por favor completar el campo Codigo");
-       }
+        try {
+            Materia mat = md.buscarMateria(Integer.parseInt(codigo.getText()));
+            codigo.setText(mat.getIdMateria() + "");
+            nombre.setText(mat.getNombre());
+            año.setText(mat.getAño() + "");
+            estado.setSelected(true);
+            codigo.setEditable(false);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Por favor completar el campo Codigo");
+        }
     }//GEN-LAST:event_buscarActionPerformed
 
     private void nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoActionPerformed
-       codigo.setText("");
-       nombre.setText("");
-       año.setText("");
-       estado.setSelected(false);
+        codigo.setEditable(true);
+        codigo.setText("");
+        nombre.setText("");
+        año.setText("");
+        estado.setSelected(false);
     }//GEN-LAST:event_nuevoActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -262,48 +262,47 @@ public class AbmMAteria extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
-        if(!codigo.getText().isEmpty()){
+        if (!codigo.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "No ingrese valores en el campo Codigo");
-        }else if(nombre.getText().isEmpty() || año.getText().isEmpty() || !estado.isSelected()){
+        } else if (nombre.getText().isEmpty() || año.getText().isEmpty() || !estado.isSelected()) {
             JOptionPane.showMessageDialog(null, "Por favor complete los campos requeridos");
-        }else{
+        } else {
             try {
-                md.guardarMateria(new Materia(nombre.getText(),Integer.parseInt(año.getText()),estado.isEnabled()));
+                md.guardarMateria(new Materia(nombre.getText(), Integer.parseInt(año.getText()), estado.isEnabled()));
             } catch (SQLException ex) {
-                
+
             }
         }
     }//GEN-LAST:event_guardarActionPerformed
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
-        try{
-        md.eliminarMateria(Integer.parseInt(codigo.getText()));
-        }catch(NumberFormatException ex){
-           JOptionPane.showMessageDialog(null, "Por favor completar el campo Codigo");
-       }
+        try {
+            md.eliminarMateria(Integer.parseInt(codigo.getText()));
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Por favor completar el campo Codigo");
+        }
     }//GEN-LAST:event_eliminarActionPerformed
 
     private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
-      if(codigo.getText().isEmpty() || nombre.getText().isEmpty() || año.getText().isEmpty() || !estado.isSelected()){
-          JOptionPane.showMessageDialog(null, "Por favor completar todos los campos requeridos");
-      }else{
-          Materia mat = md.buscarMateria(Integer.parseInt(codigo.getText()));
-      
-        
-        mat.setNombre(nombre.getText());
-        mat.setAño(Integer.parseInt(año.getText()));
-          try {
-              md.modificarMateria(mat);
-          } catch (SQLException ex) {
-              
-          }
-      }
+        if (codigo.getText().isEmpty() || nombre.getText().isEmpty() || año.getText().isEmpty() || !estado.isSelected()) {
+            JOptionPane.showMessageDialog(null, "Por favor completar todos los campos requeridos");
+        } else {
+            Materia mat = md.buscarMateria(Integer.parseInt(codigo.getText()));
+
+            mat.setNombre(nombre.getText());
+            mat.setAño(Integer.parseInt(año.getText()));
+            try {
+                md.modificarMateria(mat);
+            } catch (SQLException ex) {
+
+            }
+        }
     }//GEN-LAST:event_modificarActionPerformed
 
     private void codigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_codigoKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        if(c<'0' || c>'9') {
+        if (c < '0' || c > '9') {
             evt.consume();
         }
     }//GEN-LAST:event_codigoKeyTyped
@@ -311,7 +310,7 @@ public class AbmMAteria extends javax.swing.JInternalFrame {
     private void añoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_añoKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        if(c<'0' || c>'9') {
+        if (c < '0' || c > '9') {
             evt.consume();
         }
     }//GEN-LAST:event_añoKeyTyped
@@ -319,7 +318,7 @@ public class AbmMAteria extends javax.swing.JInternalFrame {
     private void nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        if((c<'a' || c>'z') && (c<'A' || c>'Z')) {
+        if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z')) {
             evt.consume();
         }
     }//GEN-LAST:event_nombreKeyTyped

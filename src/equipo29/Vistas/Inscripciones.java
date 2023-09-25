@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package equipo29.vistas;
 
 import equipo29.Conexion.AlumnoData;
@@ -12,9 +11,7 @@ import equipo29.Data.Alumno;
 import equipo29.Data.Inscripcion;
 import equipo29.Data.Materia;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.TreeSet;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -24,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
  * @author 20352555674
  */
 public class Inscripciones extends javax.swing.JInternalFrame {
+
     private InscripcionData ins;
     private AlumnoData ad;
     private ArrayList<Alumno> alumnos1 = new ArrayList<>();
@@ -34,16 +32,17 @@ public class Inscripciones extends javax.swing.JInternalFrame {
             return false;
         }
     };
+
     /**
      * Creates new form Inscripciones
      */
-    public Inscripciones(InscripcionData ins,AlumnoData ad) {
-       
+    public Inscripciones(InscripcionData ins, AlumnoData ad) {
+
         initComponents();
         armarCombo();
         armarCabecera();
-        this.ins=ins;
-        this.ad=ad;
+        this.ins = ins;
+        this.ad = ad;
     }
 
     /**
@@ -234,33 +233,33 @@ public class Inscripciones extends javax.swing.JInternalFrame {
     private void noinscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noinscriptasActionPerformed
         Alumno al = (Alumno) alumnos.getSelectedItem();
         borrarFilas();
-        if(noinscriptas.isSelected()){
+        if (noinscriptas.isSelected()) {
             materias1 = ins.obtenerMateriasNOCursadas(al.getIdAlumno());
             cargarDatos(materias1);
             inscriptas.setEnabled(false);
-           
-        }else{
-            
+
+        } else {
+
             inscriptas.setEnabled(true);
         }
-        
-        
+
+
     }//GEN-LAST:event_noinscriptasActionPerformed
 
     private void inscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inscriptasActionPerformed
         Alumno al = (Alumno) alumnos.getSelectedItem();
         //List<Materia> materias2 = new ArrayList<>();
         borrarFilas();
-        if(inscriptas.isSelected()){
+        if (inscriptas.isSelected()) {
             materias1 = ins.obtenerMateriasCursadas(al.getIdAlumno());
-             cargarDatos(materias1);
-            
-           noinscriptas.setEnabled(false);
-        }else{
-            
+            cargarDatos(materias1);
+
+            noinscriptas.setEnabled(false);
+        } else {
+
             noinscriptas.setEnabled(true);
         }
-        
+
     }//GEN-LAST:event_inscriptasActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -270,19 +269,18 @@ public class Inscripciones extends javax.swing.JInternalFrame {
             Materia mat = new Materia(Integer.parseInt(modelo.getValueAt(tabla.getSelectedRow(), 0).toString()), modelo.getValueAt(tabla.getSelectedRow(), 1).toString(), Integer.parseInt(modelo.getValueAt(tabla.getSelectedRow(), 2).toString()), true);
             Inscripcion insc = new Inscripcion(al, mat);
             ins.guardarInscripcion(insc);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Seleccione alguna de las opciones");
         }
-        //ins.guardarInscripcion(insc);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-         if (tabla.getSelectedRow() != -1) {
+        if (tabla.getSelectedRow() != -1) {
             Alumno al = (Alumno) alumnos.getSelectedItem();
             int idmat = Integer.parseInt(modelo.getValueAt(tabla.getSelectedRow(), 0).toString());
             ins.borrarInscripcionMateriaAlumno(al.getIdAlumno(), idmat);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Seleccione alguna de las opciones");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -304,38 +302,34 @@ public class Inscripciones extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton noinscriptas;
     private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
-     
-     private void armarCombo() {
+
+    private void armarCombo() {
         AlumnoData al = new AlumnoData();
-      
+
         for (Alumno alum : al.listarAlumnos()) {
-          alumnos.addItem(alum);
+            alumnos.addItem(alum);
         }
-        
+
     }
-     private void armarCabecera(){
+
+    private void armarCabecera() {
         modelo.addColumn("idMateria");
         modelo.addColumn("Nombre");
         modelo.addColumn("Año");
         tabla.setModel(modelo);
     }
-     
-         private void cargarDatos(List<Materia> materias1) { //Esta lista de alumnos puede provenir de la BD o cargada por parámetros
-       for(Materia mat: materias1){
-        modelo.addRow(new Object[]{mat.getIdMateria(),mat.getNombre(),mat.getAño()});
-        //JOptionPane.showMessageDialog(this, mat);
-        
 
-        
+    private void cargarDatos(List<Materia> materias1) { //Esta lista de alumnos puede provenir de la BD o cargada por parámetros
+        for (Materia mat : materias1) {
+            modelo.addRow(new Object[]{mat.getIdMateria(), mat.getNombre(), mat.getAño()});
+
+        }
     }
-     }
-         private void borrarFilas(){
-    int f=tabla.getRowCount()-1;
-    for(;f>=0;f--){
-        modelo.removeRow(f);
+
+    private void borrarFilas() {
+        int f = tabla.getRowCount() - 1;
+        for (; f >= 0; f--) {
+            modelo.removeRow(f);
+        }
     }
 }
- }
-
-
-

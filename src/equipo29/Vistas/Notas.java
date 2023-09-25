@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package equipo29.vistas;
 
 import equipo29.Conexion.AlumnoData;
 import equipo29.Conexion.InscripcionData;
 import equipo29.Data.Alumno;
 import equipo29.Data.Inscripcion;
-import equipo29.Data.Materia;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -21,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
  * @author 20352555674
  */
 public class Notas extends javax.swing.JInternalFrame {
+
     private InscripcionData ins;
     private AlumnoData ad;
     private ArrayList<Alumno> alumnos1 = new ArrayList<>();
@@ -28,21 +27,22 @@ public class Notas extends javax.swing.JInternalFrame {
     private final DefaultComboBoxModel combo = new DefaultComboBoxModel();
     private DefaultTableModel modelo = new DefaultTableModel() { //Sobreescribimos un método de DefaultTableModel para que las celdas no sean editables
         public boolean isCellEditable(int fila, int columna) {
-            if (columna==2){
+            if (columna == 2) {
                 return true;
             }
             return false;
         }
     };
+
     /**
      * Creates new form Notas
      */
-    public Notas(InscripcionData ins,AlumnoData ad) {
+    public Notas(InscripcionData ins, AlumnoData ad) {
         initComponents();
         armarCombo();
         armarCabecera();
-        this.ins=ins;
-        this.ad=ad;
+        this.ins = ins;
+        this.ad = ad;
     }
 
     /**
@@ -188,12 +188,12 @@ public class Notas extends javax.swing.JInternalFrame {
         borrarFilas();
         inscripcion1 = ins.obtenerInscripcionesPorAlumno(alu.getIdAlumno());
         cargarDatos(inscripcion1);
-        
+
     }//GEN-LAST:event_botonNotasActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-         Alumno alu = (Alumno) comboNotas.getSelectedItem();
+        Alumno alu = (Alumno) comboNotas.getSelectedItem();
         ins.actualizarNota(Integer.parseInt(modelo.getValueAt(tablaNotas.getSelectedRow(), 0).toString()), alu.getIdAlumno(), Integer.parseInt(modelo.getValueAt(tablaNotas.getSelectedRow(), 2).toString()));
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -229,15 +229,15 @@ public class Notas extends javax.swing.JInternalFrame {
     private void cargarDatos(List<Inscripcion> inscripcion1) { //Esta lista de alumnos puede provenir de la BD o cargada por parámetros
         for (Inscripcion insc : inscripcion1) {
             modelo.addRow(new Object[]{insc.getMateria().getIdMateria(), insc.getMateria().getNombre(), insc.getNota()});
-            //JOptionPane.showMessageDialog(this, mat);
+
         }
     }
 
-    private void borrarFilas(){
-    int f=tablaNotas.getRowCount()-1;
-    for(;f>=0;f--){
-        modelo.removeRow(f);
-    }
+    private void borrarFilas() {
+        int f = tablaNotas.getRowCount() - 1;
+        for (; f >= 0; f--) {
+            modelo.removeRow(f);
+        }
     }
 
 }

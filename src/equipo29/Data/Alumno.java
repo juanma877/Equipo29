@@ -1,29 +1,28 @@
-
 package equipo29.Data;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
-
 public class Alumno {
+
     private int idAlumno = -1;
     private int dni;
     private String apellido;
     private String nombre;
     private LocalDate fechaNacimiento;
     private boolean estado;
-    
-    public Alumno(){
+
+    public Alumno() {
         this.idAlumno = -1;
     }
-    public Alumno(int idAlumno,int dni,String apellido,String nombre,LocalDate fechaNacimiento, boolean estado){
-       this.idAlumno=idAlumno;
-       this.dni=dni;
-       this.apellido=apellido;
-       this.nombre=nombre;
-       this.fechaNacimiento=fechaNacimiento;
-       this.estado=estado;
-       
+
+    public Alumno(int idAlumno, int dni, String apellido, String nombre, LocalDate fechaNacimiento, boolean estado) {
+        this.idAlumno = idAlumno;
+        this.dni = dni;
+        this.apellido = apellido;
+        this.nombre = nombre;
+        this.fechaNacimiento = fechaNacimiento;
+        this.estado = estado;
+
     }
 
     public Alumno(int dni, String apellido, String nombre, LocalDate fechaNacimiento, boolean estado) {
@@ -85,8 +84,7 @@ public class Alumno {
 
     @Override
     public String toString() {
-        return   idAlumno + " - "+ apellido + ", "+ nombre  ;
+        return idAlumno + " - " + apellido + ", " + nombre;
     }
-    
-    
+
 }

@@ -9,8 +9,6 @@ import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class MateriaData {
@@ -21,7 +19,7 @@ public class MateriaData {
         con = Conexion.buscarConexion();
     }
 
-    public void guardarMateria(Materia materia) throws SQLIntegrityConstraintViolationException, SQLException{
+    public void guardarMateria(Materia materia) throws SQLIntegrityConstraintViolationException, SQLException {
         String sql = "INSERT INTO materia (nombre,año,estado)"
                 + "VALUES(?,?,?)";
 
@@ -38,18 +36,17 @@ public class MateriaData {
                 materia.setIdMateria(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Materia guardada con éxito");
             }
-           
 
         } catch (SQLIntegrityConstraintViolationException ex) {
             JOptionPane.showMessageDialog(null, "El Nombre de la Materia indicado ya se encuentra registrado");
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
 
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia");
         }
 
     }
 
-    public void modificarMateria(Materia materia) throws SQLIntegrityConstraintViolationException, SQLException{
+    public void modificarMateria(Materia materia) throws SQLIntegrityConstraintViolationException, SQLException {
         String sql = "UPDATE materia SET nombre = ?, año = ? WHERE idMateria=?";
 
         try {
@@ -62,9 +59,9 @@ public class MateriaData {
                 JOptionPane.showMessageDialog(null, "Materia modificada");
             }
 
-        }  catch (SQLIntegrityConstraintViolationException ex) {
+        } catch (SQLIntegrityConstraintViolationException ex) {
             JOptionPane.showMessageDialog(null, "El Codigo de Materia indicado ya se encuentra registrado");
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia");
         }
     }
@@ -111,7 +108,7 @@ public class MateriaData {
         return materia;
     }
 
-    public List <Materia> listarMaterias() {
+    public List<Materia> listarMaterias() {
         String sql = "SELECT idMateria, nombre, año FROM materia WHERE estado=1 ";
 
         ArrayList<Materia> materias = new ArrayList<>();
@@ -120,14 +117,14 @@ public class MateriaData {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-               Materia materia = new Materia();
+                Materia materia = new Materia();
                 materia.setIdMateria(rs.getInt("idMateria"));
                 materia.setNombre(rs.getString("nombre"));
                 materia.setAño(rs.getInt("año"));
                 materia.setEstado(true);
-                
+
                 materias.add(materia);
-            } 
+            }
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia");

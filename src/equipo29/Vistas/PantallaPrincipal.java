@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package equipo29.vistas;
 
 import equipo29.Conexion.AlumnoData;
@@ -15,9 +14,11 @@ import equipo29.Conexion.MateriaData;
  * @author 20352555674
  */
 public class PantallaPrincipal extends javax.swing.JFrame {
-private AlumnoData ad;
-private MateriaData md;
-private InscripcionData ins;
+
+    private AlumnoData ad;
+    private MateriaData md;
+    private InscripcionData ins;
+
     /**
      * Creates new form PantallaPrincipal
      */
@@ -145,48 +146,48 @@ private InscripcionData ins;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-       escritorio.removeAll();
-       escritorio.repaint();
-       AbmAlumno alumno = new AbmAlumno(ad);
-       alumno.setVisible(true);
-       escritorio.add(alumno);
-       escritorio.moveToFront(alumno);
+        escritorio.removeAll();
+        escritorio.repaint();
+        AbmAlumno alumno = new AbmAlumno(ad);
+        alumno.setVisible(true);
+        escritorio.add(alumno);
+        escritorio.moveToFront(alumno);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         escritorio.removeAll();
-       escritorio.repaint();
-       AbmMAteria materia = new AbmMAteria(md);
-       materia.setVisible(true);
-       escritorio.add(materia);
-       escritorio.moveToFront(materia);
+        escritorio.repaint();
+        AbmMAteria materia = new AbmMAteria(md);
+        materia.setVisible(true);
+        escritorio.add(materia);
+        escritorio.moveToFront(materia);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         escritorio.removeAll();
-       escritorio.repaint();
-       Inscripciones inscripcion = new Inscripciones(ins,ad);
-       inscripcion.setVisible(true);
-       escritorio.add(inscripcion);
-       escritorio.moveToFront(inscripcion);
+        escritorio.repaint();
+        Inscripciones inscripcion = new Inscripciones(ins, ad);
+        inscripcion.setVisible(true);
+        escritorio.add(inscripcion);
+        escritorio.moveToFront(inscripcion);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         escritorio.removeAll();
-       escritorio.repaint();
-       Notas nota = new Notas(ins,ad);
-       nota.setVisible(true);
-       escritorio.add(nota);
-       escritorio.moveToFront(nota);
+        escritorio.repaint();
+        Notas nota = new Notas(ins, ad);
+        nota.setVisible(true);
+        escritorio.add(nota);
+        escritorio.moveToFront(nota);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         escritorio.removeAll();
-       escritorio.repaint();
-       ConsultaAxM consultaAlumno = new ConsultaAxM();
-       consultaAlumno.setVisible(true);
-       escritorio.add(consultaAlumno);
-       escritorio.moveToFront(consultaAlumno);
+        escritorio.repaint();
+        ConsultaAxM consultaAlumno = new ConsultaAxM();
+        consultaAlumno.setVisible(true);
+        escritorio.add(consultaAlumno);
+        escritorio.moveToFront(consultaAlumno);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MouseClicked

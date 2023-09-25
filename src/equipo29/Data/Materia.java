@@ -1,8 +1,7 @@
-
 package equipo29.Data;
 
-
 public class Materia {
+
     private int idMateria = -1;
     private String nombre;
     private int año;
@@ -20,7 +19,7 @@ public class Materia {
     }
 
     public Materia(String nombre, int año, boolean estado) {
-        this.idMateria=-1;
+        this.idMateria = -1;
         this.nombre = nombre;
         this.año = año;
         this.estado = estado;
@@ -60,8 +59,7 @@ public class Materia {
 
     @Override
     public String toString() {
-        return   idMateria + " - "+ nombre;
+        return idMateria + " - " + nombre;
     }
-    
-    
+
 }

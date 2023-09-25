@@ -11,8 +11,6 @@ import javax.swing.JOptionPane;
 import equipo29.Data.Alumno;
 import equipo29.Data.Inscripcion;
 import equipo29.Data.Materia;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class InscripcionData {
 
@@ -190,8 +188,8 @@ public class InscripcionData {
                 alumno.setDni(rs.getInt("dni"));
                 alumno.setApellido(rs.getString("apellido"));
                 alumno.setNombre(rs.getString("nombre"));
-                //alumno.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
-                //alumno.setEstado(rs.getBoolean("estado"));
+                alumno.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
+                alumno.setEstado(rs.getBoolean("estado"));
                 alumnos.add(alumno);
             }
             ps.close();

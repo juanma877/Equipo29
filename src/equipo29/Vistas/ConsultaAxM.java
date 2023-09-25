@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package equipo29.vistas;
 
 import equipo29.Conexion.InscripcionData;
@@ -20,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
  * @author 20352555674
  */
 public class ConsultaAxM extends javax.swing.JInternalFrame {
+
     private InscripcionData ins = new InscripcionData();
     private MateriaData md = new MateriaData();
     private List<Alumno> alumnos1 = new ArrayList<>();
@@ -37,8 +37,8 @@ public class ConsultaAxM extends javax.swing.JInternalFrame {
         initComponents();
         armarCombo();
         armarCabecera();
-        this.ins=ins;
-        this.md=md;
+        this.ins = ins;
+        this.md = md;
     }
 
     /**
@@ -210,11 +210,11 @@ public class ConsultaAxM extends javax.swing.JInternalFrame {
         }
     }
 
-    private void borrarFilas(){
-    int f=tablaMateria.getRowCount()-1;
-    for(;f>=0;f--){
-        modelo.removeRow(f);
-    }
+    private void borrarFilas() {
+        int f = tablaMateria.getRowCount() - 1;
+        for (; f >= 0; f--) {
+            modelo.removeRow(f);
+        }
     }
 
 }

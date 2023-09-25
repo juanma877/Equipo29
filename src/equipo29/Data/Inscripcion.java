@@ -1,15 +1,14 @@
-
 package equipo29.Data;
 
-
 public class Inscripcion {
+
     private int idInscripcion = -1;
     private int nota;
     private Alumno alumno;
     private Materia materia;
 
     public Inscripcion() {
-        this.idInscripcion=-1;
+        this.idInscripcion = -1;
     }
 
     public Inscripcion(int nota, Alumno alumno, Materia materia) {
@@ -17,7 +16,7 @@ public class Inscripcion {
         this.alumno = alumno;
         this.materia = materia;
     }
-    
+
     public Inscripcion(Alumno alumno, Materia materia) {
         this.alumno = alumno;
         this.materia = materia;
@@ -60,6 +59,4 @@ public class Inscripcion {
         return "Inscripcion{" + "idInscripcion=" + idInscripcion + ", nota=" + nota + ", alumno=" + alumno + ", materia=" + materia + '}';
     }
 
-    
-    
 }
