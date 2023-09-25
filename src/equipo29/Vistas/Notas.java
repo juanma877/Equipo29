@@ -12,6 +12,7 @@ import equipo29.Data.Inscripcion;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -194,7 +195,11 @@ public class Notas extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         Alumno alu = (Alumno) comboNotas.getSelectedItem();
+        try {
         ins.actualizarNota(Integer.parseInt(modelo.getValueAt(tablaNotas.getSelectedRow(), 0).toString()), alu.getIdAlumno(), Integer.parseInt(modelo.getValueAt(tablaNotas.getSelectedRow(), 2).toString()));
+        }catch (NumberFormatException ex){
+            JOptionPane.showMessageDialog(null, "El campo NOTA solo admite numeros del 0 al 10");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
