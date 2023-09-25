@@ -238,11 +238,13 @@ public class AbmMAteria extends javax.swing.JInternalFrame {
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
         try {
             Materia mat = md.buscarMateria(Integer.parseInt(codigo.getText()));
+            if(mat.getIdMateria() > -1){
             codigo.setText(mat.getIdMateria() + "");
             nombre.setText(mat.getNombre());
             año.setText(mat.getAño() + "");
             estado.setSelected(true);
             codigo.setEditable(false);
+            }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Por favor completar el campo Codigo");
         }
