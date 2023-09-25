@@ -364,7 +364,7 @@ public class AbmAlumno extends javax.swing.JInternalFrame {
     private void apellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_apellidoKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z')) {
+        if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && (c < ' ' || c > ' ')) {
             evt.consume();
         }
     }//GEN-LAST:event_apellidoKeyTyped
@@ -372,7 +372,7 @@ public class AbmAlumno extends javax.swing.JInternalFrame {
     private void nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z')) {
+        if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && (c < ' ' || c > ' ')) {
             evt.consume();
         }
     }//GEN-LAST:event_nombreKeyTyped

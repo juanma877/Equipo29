@@ -320,7 +320,7 @@ public class AbmMAteria extends javax.swing.JInternalFrame {
     private void nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z')) {
+        if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && (c < ' ' || c > ' ') && (c < '0' || c > '9')) {
             evt.consume();
         }
     }//GEN-LAST:event_nombreKeyTyped
