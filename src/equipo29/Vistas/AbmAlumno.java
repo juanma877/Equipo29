@@ -285,6 +285,8 @@ public class AbmAlumno extends javax.swing.JInternalFrame {
                 estado.setSelected(true);
                 fechaNacimiento.setDate(Date.from(alum.getFechaNacimiento().atStartOfDay(ZoneId.systemDefault()).toInstant()));
                 id.setEditable(false);
+            }else if (documento.getText().isEmpty() && id.getText().isEmpty()){
+                JOptionPane.showMessageDialog(null, "Ingrese ID o Documento del alumno para realizar una busqueda");
             }
         } catch (NullPointerException ex) {
 
