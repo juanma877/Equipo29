@@ -38,7 +38,7 @@ public class MateriaData {
             }
 
         } catch (SQLIntegrityConstraintViolationException ex) {
-            JOptionPane.showMessageDialog(null, "El Nombre de la Materia indicado ya se encuentra registrado");
+            JOptionPane.showMessageDialog(null, "El Nombre de la Materia indicada ya se encuentra registrado");
         } catch (SQLException ex) {
 
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia");
