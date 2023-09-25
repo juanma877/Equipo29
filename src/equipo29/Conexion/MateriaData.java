@@ -77,6 +77,8 @@ public class MateriaData {
 
             if (actualizar == 1) {
                 JOptionPane.showMessageDialog(null, "Materia eliminada");
+            }else{
+                JOptionPane.showMessageDialog(null, "El codigo indicado no corresponde a una materia valida");
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia");

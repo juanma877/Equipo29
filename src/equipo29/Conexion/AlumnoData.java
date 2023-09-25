@@ -87,6 +87,8 @@ public class AlumnoData {
             if (affectedRows == 1) {
 
                 JOptionPane.showMessageDialog(null, "Alumno Eliminado");
+            }else{
+                JOptionPane.showMessageDialog(null, "El codigo indicado no corresponde a un alumno valido");
             }
 
         } catch (SQLException ex) {
