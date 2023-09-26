@@ -2,7 +2,7 @@ package equipo29.Data;
 
 import java.time.LocalDate;
 
-public class Alumno {
+public class Alumno implements Comparable<Alumno>{
 
     private int idAlumno = -1;
     private int dni;
@@ -85,6 +85,17 @@ public class Alumno {
     @Override
     public String toString() {
         return idAlumno + " - " + apellido + ", " + nombre;
+    }
+
+    @Override
+    public int compareTo(Alumno t) {
+        if (idAlumno == t.idAlumno){
+            return 0;
+        }else if(idAlumno > t.idAlumno){
+            return 1;
+        }else{
+            return -1;
+        }
     }
 
 }

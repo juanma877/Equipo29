@@ -11,6 +11,7 @@ import equipo29.Data.Alumno;
 import equipo29.Data.Inscripcion;
 import equipo29.Data.Materia;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -269,6 +270,7 @@ public class Inscripciones extends javax.swing.JInternalFrame {
         borrarFilas();
         if (noinscriptas.isSelected()) {
             materias1 = ins.obtenerMateriasNOCursadas(al.getIdAlumno());
+            Collections.sort(materias1);
             cargarDatos(materias1);
             inscriptas.setEnabled(false);
 
@@ -286,6 +288,7 @@ public class Inscripciones extends javax.swing.JInternalFrame {
         borrarFilas();
         if (inscriptas.isSelected()) {
             materias1 = ins.obtenerMateriasCursadas(al.getIdAlumno());
+            Collections.sort(materias1);
             cargarDatos(materias1);
 
             noinscriptas.setEnabled(false);

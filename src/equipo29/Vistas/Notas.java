@@ -10,6 +10,7 @@ import equipo29.Conexion.InscripcionData;
 import equipo29.Data.Alumno;
 import equipo29.Data.Inscripcion;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -201,6 +202,7 @@ public class Notas extends javax.swing.JInternalFrame {
         Alumno alu = (Alumno) comboNotas.getSelectedItem();
         borrarFilas();
         inscripcion1 = ins.obtenerInscripcionesPorAlumno(alu.getIdAlumno());
+        Collections.sort(inscripcion1);
         cargarDatos(inscripcion1);
 
     }//GEN-LAST:event_botonNotasActionPerformed

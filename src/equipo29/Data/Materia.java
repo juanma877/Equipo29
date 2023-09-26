@@ -1,6 +1,6 @@
 package equipo29.Data;
 
-public class Materia {
+public class Materia implements Comparable<Materia>{
 
     private int idMateria = -1;
     private String nombre;
@@ -60,6 +60,18 @@ public class Materia {
     @Override
     public String toString() {
         return idMateria + " - " + nombre;
+    }
+
+
+    @Override
+    public int compareTo(Materia t) {
+        if (idMateria == t.idMateria){
+            return 0;
+        }else if(idMateria > t.idMateria){
+            return 1;
+        }else{
+            return -1;
+        }
     }
 
 }

@@ -10,6 +10,7 @@ import equipo29.Conexion.MateriaData;
 import equipo29.Data.Alumno;
 import equipo29.Data.Materia;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
@@ -194,6 +195,7 @@ public class ConsultaAxM extends javax.swing.JInternalFrame {
         Materia mat = (Materia) comboMateria.getSelectedItem();
         borrarFilas();
         alumnos1 = ins.obtenerAlumnoXMateria(mat.getIdMateria());
+        Collections.sort(alumnos1);
         cargarDatos(alumnos1);
     }//GEN-LAST:event_jButton2ActionPerformed
 

@@ -1,6 +1,6 @@
 package equipo29.Data;
 
-public class Inscripcion {
+public class Inscripcion implements Comparable<Inscripcion>{
 
     private int idInscripcion = -1;
     private int nota;
@@ -57,6 +57,17 @@ public class Inscripcion {
     @Override
     public String toString() {
         return "Inscripcion{" + "idInscripcion=" + idInscripcion + ", nota=" + nota + ", alumno=" + alumno + ", materia=" + materia + '}';
+    }
+
+    @Override
+    public int compareTo(Inscripcion t) {
+         if (materia.getIdMateria() == t.materia.getIdMateria()){
+            return 0;
+        }else if(materia.getIdMateria() > t.materia.getIdMateria()){
+            return 1;
+        }else{
+            return -1;
+        }
     }
 
 }
