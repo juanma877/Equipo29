@@ -170,8 +170,9 @@ public class AbmAlumno extends javax.swing.JInternalFrame {
         });
 
         modificar.setBackground(new java.awt.Color(153, 255, 204));
-        modificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/equipo29/Imagenes/btn_modificarro.png"))); // NOI18N
+        modificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/equipo29/Imagenes/btn_modificar.png"))); // NOI18N
         modificar.setToolTipText("Modificar");
+        modificar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/equipo29/Imagenes/btn_modificarro.png"))); // NOI18N
         modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 modificarActionPerformed(evt);

@@ -377,9 +377,12 @@
               <Color blue="cc" green="ff" red="99" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/equipo29/Imagenes/btn_modificarro.png"/>
+              <Image iconType="3" name="/equipo29/Imagenes/btn_modificar.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Modificar"/>
+            <Property name="rolloverIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/equipo29/Imagenes/btn_modificarro.png"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="modificarActionPerformed"/>
