@@ -14,8 +14,10 @@
  <tr border="none">
     <td width="25%" align="center">
       <p align="center">
+       Herramientas utilizadas
+      </p>
+     <p align="center">
         <a href="https://tu-enlace-a-github" title="Ir a GitHub">
-         Herramientas utilizadas
           <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" alt="GitHub" />
         </a>
       </p>
