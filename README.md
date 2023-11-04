@@ -1,5 +1,5 @@
-# Equipo29
- Proyecto para agregar alumnos y materias a la universidad, y administrar las inscripciones de los mismos.
+- Project to add students and subjects to the university, and manage their registrations.
+- Proyecto para agregar alumnos y materias a la universidad, y administrar las inscripciones de los mismos.
  
 <table align="left">
   <tr border="none">
